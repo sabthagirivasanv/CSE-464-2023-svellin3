@@ -12,13 +12,15 @@ public class Application {
 
 //        graphManager.addNode("f");
 //        graphManager.addNodes("g", "a", "h");
-//        graphManager.removeNode("b");
 //        graphManager.removeNodes("a","g","h","k");
 //        graphManager.removeEdge("b", "c");
-//        graphManager.addEdge("b", "a");
-//        graphManager.addEdge("a", "c");
+        graphManager.addEdge("a", "f");
+        graphManager.addEdge("f", "c");
+        graphManager.addEdge("a", "d");
+        graphManager.addEdge("b", "a");
+        graphManager.addNode("e");
 //        graphManager.removeEdge("a","d");
-//        graphManager.removeEdge("d","a");
+        graphManager.outputGraphics("outputGraphics.png", "png");
 
     }
 }

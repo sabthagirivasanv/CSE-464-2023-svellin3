@@ -12,6 +12,7 @@ public interface GraphManager {
     int nodeSize();
     void addEdge(String srcLabel, String dstLabel);
     void removeEdge(String srcLabel, String dstLabel);
-    void outputDOTGraph(String path);
-    void outputGraphics(String path, String format);
+    void outputDOTGraph(String path) throws IOException;
+    void outputGraphics(String path, String format) throws IOException;
+    String toString();
 }

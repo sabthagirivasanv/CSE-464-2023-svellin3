@@ -1,11 +1,14 @@
 package com.svellin3.impl;
 
 import com.svellin3.GraphManager;
+import guru.nidi.graphviz.engine.Format;
+import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
 import guru.nidi.graphviz.parse.Parser;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.util.Objects;
 
 public class GraphManagerImpl implements GraphManager{
 
@@ -35,8 +38,7 @@ public class GraphManagerImpl implements GraphManager{
         System.out.println("Number of Nodes: "+nodeSize());
         System.out.println("Label of Nodes:"+ graph.getAllNodes());
         System.out.println("Number of Edges: "+edgeSize());
-        System.out.println("Edges: ");
-        output = graph.toString();
+        output = graph.convertToGraphViz().toString();
         System.out.println(output);
         return output;
     }
@@ -69,13 +71,24 @@ public class GraphManagerImpl implements GraphManager{
     }
 
     @Override
-    public void outputDOTGraph(String path) {
-
+    public void outputDOTGraph(String path) throws IOException {
+        MutableGraph mutGraph = graph.convertToGraphViz();
+        Graphviz.fromGraph(mutGraph).width(900).render(Format.DOT).toFile(new File(path));
     }
 
     @Override
-    public void outputGraphics(String path, String format) {
+    public void outputGraphics(String path, String format) throws IOException {
+        MutableGraph mutGraph = graph.convertToGraphViz();
 
+        if(Objects.equals(format, "png") || Objects.equals(format, "PNG")){
+            Graphviz.fromGraph(mutGraph).width(900).render(Format.PNG).toFile(new File(path));
+        }
+        if(Objects.equals(format, "svg") || Objects.equals(format, "SVG")){
+            Graphviz.fromGraph(mutGraph).width(900).render(Format.SVG).toFile(new File(path));
+        }
+        if(Objects.equals(format, "dot") || Objects.equals(format, "DOT")){
+            Graphviz.fromGraph(mutGraph).width(900).render(Format.DOT).toFile(new File(path));
+        }
     }
 
 }

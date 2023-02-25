@@ -7,6 +7,9 @@ import guru.nidi.graphviz.model.MutableNode;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static guru.nidi.graphviz.model.Factory.mutGraph;
+import static guru.nidi.graphviz.model.Factory.mutNode;
+
 public class Graph {
     private String name;
     private Map<String, Node> nodes;
@@ -27,8 +30,8 @@ public class Graph {
     }
 
     private void createEdge(String srcLabel, String dstLabel) {
-        Node src = nodes.get(srcLabel);
-        Node dst = nodes.get(dstLabel);
+        Node src = nodes.getOrDefault(srcLabel, nodes.put(srcLabel, new Node(srcLabel)));
+        Node dst = nodes.getOrDefault(dstLabel, nodes.put(dstLabel, new Node(dstLabel)));
         edges.putIfAbsent(Edge.edgeString(src, dst), new Edge(src, dst));
     }
 
@@ -104,5 +107,12 @@ public class Graph {
             System.out.println("No such edge exist from " + srcLabel + " to " + dstLabel);
 
         }
+    }
+
+    public MutableGraph convertToGraphViz(){
+        MutableGraph g = mutGraph(name).setDirected(true);
+        nodes.values().forEach(each -> g.add(mutNode(each.getName())));
+        edges.values().forEach(each -> g.add(mutNode(each.getSource().getName()).addLink(mutNode(each.getDestination().getName()))));
+        return g;
     }
 }
