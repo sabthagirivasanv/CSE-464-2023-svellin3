@@ -1,4 +1,4 @@
-package com.svellin3;
+package com.svellin3.impl;
 
 public class Node {
     private String name;

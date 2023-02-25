@@ -1,6 +1,7 @@
 package com.svellin3;
 
 
+import com.svellin3.impl.GraphManagerImpl;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +13,7 @@ public class GraphManagerTest {
 
     @Before
     public void setUp() throws Exception {
-        g = new GraphManager();
+        g = new GraphManagerImpl();
         g.parseGraph(TEST_FILE_NAME);
     }
 

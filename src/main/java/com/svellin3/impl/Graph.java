@@ -1,4 +1,4 @@
-package com.svellin3;
+package com.svellin3.impl;
 
 import guru.nidi.graphviz.model.Link;
 import guru.nidi.graphviz.model.MutableGraph;
@@ -50,5 +50,36 @@ public class Graph {
             builder.append(each.toString()).append("\n");
         }
         return builder.toString();
+    }
+
+    public void addNode(String nodeName) {
+        if(nodes.containsKey(nodeName)){
+            System.out.println("Node: "+nodeName+" already exists!!!");
+        }else{
+            nodes.put(nodeName, new Node(nodeName));
+        }
+    }
+
+    public void addNodes(String... nodeNames) {
+        for (String node : nodeNames) {
+            addNode(node);
+        }
+    }
+
+    public void removeNode(String nodeName){
+        if(nodes.remove(nodeName) != null){
+            List<String> edgesToBeRemoved = edges.values().stream()
+                    .filter(edge -> edge.getSource().getName().equals(nodeName)
+                            || edge.getDestination().getName().equals(nodeName))
+                    .map(edge -> Edge.edgeString(edge.getSource(), edge.getDestination()))
+                    .collect(Collectors.toList());
+            edgesToBeRemoved.forEach(each -> edges.remove(each));
+        }
+    }
+
+    public void removeNodes(String... nodeNames){
+        for (String each : nodeNames) {
+            removeNode(each);
+        }
     }
 }
