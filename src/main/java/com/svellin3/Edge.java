@@ -23,4 +23,8 @@ public class Edge {
                 .append(src.getName()).append("->").append(dest.getName())
                 .toString();
     }
+
+    public String toString(){
+        return source.toString()+" -> "+destination.toString();
+    }
 }

@@ -43,4 +43,12 @@ public class Graph {
     public int edgeSize() {
         return edges.keySet().size();
     }
+
+    public String toString(){
+        StringBuilder builder = new StringBuilder();
+        for (Edge each : edges.values()){
+            builder.append(each.toString()).append("\n");
+        }
+        return builder.toString();
+    }
 }

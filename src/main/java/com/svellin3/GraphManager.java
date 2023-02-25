@@ -16,11 +16,7 @@ public class GraphManager {
         InputStream dot = new DataInputStream(Files.newInputStream(initialFile.toPath()));
         MutableGraph mutableGraph = new Parser().read(dot);
         graph = new Graph(mutableGraph);
-        System.out.println("Number of Nodes: "+nodeSize());
-        System.out.println("Label of Nodes:"+ graph.getAllNodes());
-        System.out.println("Number of Edges: "+edgeSize());
-        System.out.println("The Graph: ");
-        System.out.println(mutableGraph);
+        toString();
     }
 
     public int nodeSize(){
@@ -36,6 +32,13 @@ public class GraphManager {
     }
 
     public String toString(){
-        return graph.toString();
+        String output;
+        System.out.println("Number of Nodes: "+nodeSize());
+        System.out.println("Label of Nodes:"+ graph.getAllNodes());
+        System.out.println("Number of Edges: "+edgeSize());
+        System.out.println("Edges: ");
+        output = graph.toString();
+        System.out.println(output);
+        return output;
     }
 }
