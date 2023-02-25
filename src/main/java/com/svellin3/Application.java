@@ -7,5 +7,6 @@ public class Application {
         GraphManager graphManager = new GraphManager();
         //parse graph:
         graphManager.parseGraph("testInput.dot");
+        //graphManager.removeNode("a");
     }
 }
