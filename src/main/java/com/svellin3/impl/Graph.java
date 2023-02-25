@@ -22,10 +22,14 @@ public class Graph {
         }
 
         for (Link edge : mutableGraph.edges()) {
-            Node src = nodes.get(edge.from().name().toString());
-            Node dst = nodes.get(edge.to().name().toString());
-            edges.putIfAbsent(Edge.edgeString(src, dst), new Edge(src, dst));
+            createEdge(edge.from().name().toString(), edge.to().name().toString());
         }
+    }
+
+    private void createEdge(String srcLabel, String dstLabel) {
+        Node src = nodes.get(srcLabel);
+        Node dst = nodes.get(dstLabel);
+        edges.putIfAbsent(Edge.edgeString(src, dst), new Edge(src, dst));
     }
 
     public int nodeSize(){
@@ -80,6 +84,25 @@ public class Graph {
     public void removeNodes(String... nodeNames){
         for (String each : nodeNames) {
             removeNode(each);
+        }
+    }
+
+    public void addEdge(String srcLabel, String dstLabel) {
+        String edgeKey = Edge.edgeString(srcLabel, dstLabel);
+        if(!edges.containsKey(edgeKey)){
+            createEdge(srcLabel, dstLabel);
+        }else{
+            System.out.println("Edge already exist from "+srcLabel+" to "+dstLabel);
+        }
+    }
+
+    public void removeEdge(String srcLabel, String dstLabel) {
+        String edgeKey = Edge.edgeString(srcLabel, dstLabel);
+        if (edges.containsKey(edgeKey)) {
+            edges.remove(edgeKey);
+        } else {
+            System.out.println("No such edge exist from " + srcLabel + " to " + dstLabel);
+
         }
     }
 }

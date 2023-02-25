@@ -56,4 +56,26 @@ public class GraphManagerImpl implements GraphManager{
     public void removeNodes(String... label){
         graph.removeNodes(label);
     }
+
+
+    @Override
+    public void addEdge(String srcLabel, String dstLabel) {
+        graph.addEdge(srcLabel, dstLabel);
+    }
+
+    @Override
+    public void removeEdge(String srcLabel, String dstLabel) {
+        graph.removeEdge(srcLabel, dstLabel);
+    }
+
+    @Override
+    public void outputDOTGraph(String path) {
+
+    }
+
+    @Override
+    public void outputGraphics(String path, String format) {
+
+    }
+
 }

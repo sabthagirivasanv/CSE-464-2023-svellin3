@@ -19,8 +19,12 @@ public class Edge {
     }
 
     public static String edgeString(Node src, Node dest){
+        return edgeString(src.getName(), dest.getName());
+    }
+
+    public static String edgeString(String src, String dest){
         return new StringBuilder()
-                .append(src.getName()).append("->").append(dest.getName())
+                .append(src).append("->").append(dest)
                 .toString();
     }
 

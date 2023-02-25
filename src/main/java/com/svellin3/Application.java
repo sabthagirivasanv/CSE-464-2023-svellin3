@@ -10,18 +10,15 @@ public class Application {
         //parse graph:
         graphManager.parseGraph("testInput.dot");
 
-        graphManager.addNode("f");
-        graphManager.toString();
+//        graphManager.addNode("f");
+//        graphManager.addNodes("g", "a", "h");
+//        graphManager.removeNode("b");
+//        graphManager.removeNodes("a","g","h","k");
+//        graphManager.removeEdge("b", "c");
+//        graphManager.addEdge("b", "a");
+//        graphManager.addEdge("a", "c");
+//        graphManager.removeEdge("a","d");
+//        graphManager.removeEdge("d","a");
 
-        graphManager.addNodes("g", "a", "h");
-        graphManager.toString();
-
-        graphManager.removeNode("b");
-        graphManager.toString();
-
-        graphManager.removeNodes("a","g","h","k");
-
-        graphManager.toString();
-        //graphManager.removeNode("a");
     }
 }
