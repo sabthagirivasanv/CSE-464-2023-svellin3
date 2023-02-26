@@ -8,7 +8,7 @@ import org.junit.Test;
 
 public class GraphManagerTest {
 
-    static GraphManager g;
+    private static GraphManager g;
     private static String TEST_FILE_NAME = "testInput.dot";
 
     @Before
