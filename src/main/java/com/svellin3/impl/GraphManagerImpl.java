@@ -20,7 +20,6 @@ public class GraphManagerImpl implements GraphManager{
         InputStream dot = new DataInputStream(Files.newInputStream(initialFile.toPath()));
         MutableGraph mutableGraph = new Parser().read(dot);
         graph = new Graph(mutableGraph);
-        toString();
     }
 
     public int nodeSize(){
