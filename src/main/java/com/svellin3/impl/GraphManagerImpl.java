@@ -29,6 +29,11 @@ public class GraphManagerImpl implements GraphManager{
         return graph.edgeSize();
     }
 
+    @Override
+    public boolean containsEdge(String src, String dst) {
+        return graph.containsEdge(src, dst);
+    }
+
     public boolean containsNode(String nodeName) {
         return graph.containsNode(nodeName);
     }

@@ -15,4 +15,6 @@ public interface GraphManager {
     void outputDOTGraph(String path) throws IOException;
     void outputGraphics(String path, String format) throws IOException;
     String toString();
+    int edgeSize();
+    boolean containsEdge(String src, String dst);
 }

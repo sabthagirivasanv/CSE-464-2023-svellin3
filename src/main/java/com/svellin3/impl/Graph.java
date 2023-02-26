@@ -115,4 +115,8 @@ public class Graph {
         edges.values().forEach(each -> g.add(mutNode(each.getSource().getName()).addLink(mutNode(each.getDestination().getName()))));
         return g;
     }
+
+    public boolean containsEdge(String src, String dst) {
+        return edges.containsKey(Edge.edgeString(src, dst));
+    }
 }
