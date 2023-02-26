@@ -17,4 +17,5 @@ public interface GraphManager {
     String toString();
     int edgeSize();
     boolean containsEdge(String src, String dst);
+    void outputGraph(String filePath) throws IOException;
 }

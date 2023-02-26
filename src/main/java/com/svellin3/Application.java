@@ -20,7 +20,9 @@ public class Application {
         graphManager.addEdge("b", "a");
         graphManager.addNode("e");
 //        graphManager.removeEdge("a","d");
-        graphManager.outputGraphics("outputGraphics.png", "png");
+        graphManager.outputGraphics("outputGraphicsTest", "png");
+        graphManager.outputDOTGraph("outputTest");
+        graphManager.outputGraph("printTest");
 
     }
 }

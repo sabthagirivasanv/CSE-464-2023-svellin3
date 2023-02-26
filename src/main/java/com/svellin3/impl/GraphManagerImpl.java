@@ -8,7 +8,9 @@ import guru.nidi.graphviz.parse.Parser;
 
 import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Objects;
+import java.util.Optional;
 
 public class GraphManagerImpl implements GraphManager{
 
@@ -94,6 +96,29 @@ public class GraphManagerImpl implements GraphManager{
         if(Objects.equals(format, "dot") || Objects.equals(format, "DOT")){
             Graphviz.fromGraph(mutGraph).width(900).render(Format.DOT).toFile(new File(path));
         }
+    }
+
+    @Override
+    public void outputGraph(String filePath) throws IOException {
+        // Defining the file name of the file
+        if(!getExtension(filePath).isPresent()){
+            filePath += ".txt";
+        }
+
+        BufferedWriter writer = new BufferedWriter(new FileWriter(filePath));
+        writer.write("\nNumber of Nodes: "+nodeSize());
+        writer.write("\nLabel of Nodes:"+ graph.getAllNodes());
+        writer.write("\nNumber of Edges: "+edgeSize());
+        String output = graph.convertToGraphViz().toString();
+        writer.write('\n'+output);
+        writer.close();
+    }
+
+
+    public Optional<String> getExtension(String filename) {
+        return Optional.ofNullable(filename)
+                .filter(f -> f.contains("."))
+                .map(f -> f.substring(filename.lastIndexOf(".") + 1));
     }
 
 }

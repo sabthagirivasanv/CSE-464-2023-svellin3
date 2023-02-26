@@ -1,0 +1,15 @@
+
+Number of Nodes: 6
+Label of Nodes:[a, b, c, d, e, f]
+Number of Edges: 8
+digraph {
+"e"
+"a" -> "d"
+"a" -> "b"
+"a" -> "f"
+"b" -> "c"
+"b" -> "a"
+"c" -> "d"
+"d" -> "a"
+"f" -> "c"
+}
