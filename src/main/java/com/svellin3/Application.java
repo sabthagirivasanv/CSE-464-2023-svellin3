@@ -87,6 +87,7 @@ public class Application {
                     break;
                 case 11:
                     System.out.println("Exiting the applications...");
+                    return;
             }
 
             System.out.println("\n\nSelect an option to proceed"+
