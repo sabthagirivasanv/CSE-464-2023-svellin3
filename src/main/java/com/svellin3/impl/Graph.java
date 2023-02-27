@@ -60,6 +60,7 @@ public class Graph {
     }
 
     public void addNode(String nodeName) {
+        nodeName = nodeName.trim();
         if(nodes.containsKey(nodeName)){
             System.out.println("Node: "+nodeName+" already exists!!!");
         }else{
@@ -74,10 +75,12 @@ public class Graph {
     }
 
     public void removeNode(String nodeName){
+        nodeName = nodeName.trim();
         if(nodes.remove(nodeName) != null){
+            String finalNodeName = nodeName;
             List<String> edgesToBeRemoved = edges.values().stream()
-                    .filter(edge -> edge.getSource().getName().equals(nodeName)
-                            || edge.getDestination().getName().equals(nodeName))
+                    .filter(edge -> edge.getSource().getName().equals(finalNodeName)
+                            || edge.getDestination().getName().equals(finalNodeName))
                     .map(edge -> Edge.edgeString(edge.getSource(), edge.getDestination()))
                     .collect(Collectors.toList());
             edgesToBeRemoved.forEach(each -> edges.remove(each));
@@ -91,6 +94,8 @@ public class Graph {
     }
 
     public void addEdge(String srcLabel, String dstLabel) {
+        srcLabel = srcLabel.trim();
+        dstLabel = dstLabel.trim();
         String edgeKey = Edge.edgeString(srcLabel, dstLabel);
         if(!edges.containsKey(edgeKey)){
             createEdge(srcLabel, dstLabel);
@@ -100,6 +105,8 @@ public class Graph {
     }
 
     public void removeEdge(String srcLabel, String dstLabel) {
+        srcLabel = srcLabel.trim();
+        dstLabel = dstLabel.trim();
         String edgeKey = Edge.edgeString(srcLabel, dstLabel);
         if (edges.containsKey(edgeKey)) {
             edges.remove(edgeKey);
