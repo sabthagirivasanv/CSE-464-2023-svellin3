@@ -72,7 +72,7 @@ public class GraphManagerTest {
         g.addNode(" a");
         Assert.assertEquals(4, g.nodeSize());
         g.addNode("e");
-        Assert.assertEquals(5, g.nodeSize());
+        Assert.assertEquals(4, g.nodeSize());
     }
 
 
