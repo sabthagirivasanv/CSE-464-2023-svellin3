@@ -4,8 +4,6 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
-
 public class PathTest {
 
     private static Path path;
@@ -17,9 +15,12 @@ public class PathTest {
     @Test
     public void addNodeToThePath() {
         Assert.assertEquals("", path.toString());
-        path.addNodeToThePath(new Node("a"));
-        path.addNodeToThePath(new Node("b"));
-        path.addNodeToThePath(new Node("c"));
-        Assert.assertEquals("a -> b -> c", path.toString());
+        path.addNodeInTheEnd(new Node("a"));
+        path.addNodeInTheEnd(new Node("c"));
+        Assert.assertEquals("a -> c", path.toString());
+        path.addNodeInTheFront(new Node("f"));
+        Assert.assertEquals("f -> a -> c", path.toString());
+        path.addNodeInTheEnd(new Node("b"));
+        Assert.assertEquals("f -> a -> c -> b", path.toString());
     }
 }

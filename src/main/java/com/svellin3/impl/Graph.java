@@ -128,8 +128,70 @@ public class Graph {
     }
 
     public Path findPathUsingBFS(Node src, Node dst) {
-        Path path = null;
 
+        if (!validateNodes(src, dst)){
+            return null;
+        }
+
+        Map<String, String> parentMap = new HashMap<>();
+        Map<String, List<Node>> edgeMap = getEdgeMap();
+        Queue<String> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+        String currentParent = null;
+        queue.add(src.getName());
+        while (!queue.isEmpty()){
+            String currentNode = queue.poll();
+            if (!visited.contains(currentNode)){
+                visited.add(currentNode);
+                parentMap.put(currentNode, currentParent);
+                currentParent = currentNode;
+
+                if (currentNode.equals(dst.getName())){
+                    break;
+                }
+
+                List<Node> possibleDestinations = edgeMap.getOrDefault(currentNode, new LinkedList<>());
+                for (Node eachDst : possibleDestinations) {
+                    queue.add(eachDst.getName());
+                }
+            }
+        }
+
+        return generatePath(parentMap, dst);
+    }
+
+    private boolean validateNodes(Node... nodes) {
+        for (Node each : nodes) {
+            if (!this.nodes.containsKey(each.getName())){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private Path generatePath(Map<String, String> childToParentMap, Node dst) {
+        Path path = null;
+        if (childToParentMap.containsKey(dst.getName())){
+            path = new Path();
+            path.addNodeInTheFront(dst);
+            String parent = childToParentMap.get(dst.getName());
+            while (parent != null){
+                path.addNodeInTheFront(new Node(parent));
+                parent = childToParentMap.get(parent);
+            }
+        }
         return path;
+    }
+
+    private Map<String, List<Node>> getEdgeMap() {
+        Map<String, List<Node>> edgeMap = new HashMap<>();
+        if (!edges.values().isEmpty()){
+            for (Edge eachEdge : edges.values()) {
+                List<Node> list = edgeMap.getOrDefault(eachEdge.getSource().getName(), new LinkedList<>());
+                list.add(eachEdge.getDestination());
+                edgeMap.put(eachEdge.getSource().getName(), list);
+            }
+        }
+        return edgeMap;
     }
 }

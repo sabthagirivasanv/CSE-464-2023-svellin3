@@ -2,6 +2,8 @@ package com.svellin3;
 
 
 import com.svellin3.impl.GraphManagerImpl;
+import com.svellin3.impl.Node;
+import com.svellin3.impl.Path;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -134,5 +136,27 @@ public class GraphManagerTest {
         List<String> output = Files.readAllLines(Paths.get(TEST_OUTPUT_DOT_GRAPH_FILE));
         List<String> expected = Files.readAllLines(Paths.get(EXPECTED_OUTPUT_DOT_GRAPH_FILE));
         Assert.assertEquals(expected, output);
+    }
+
+    @Test
+    public void testGraphSearch() {
+        Path path1 = g.GraphSearch(new Node("a"), new Node("d"));
+        Assert.assertEquals("a -> b -> c -> d", path1.toString());
+
+        Path path3 = g.GraphSearch(new Node("a"), new Node("a"));
+        Assert.assertEquals("a", path3.toString());
+
+        g.addNode("f");
+        Path path2 = g.GraphSearch(new Node("a"), new Node("f"));
+        Assert.assertNull(path2);
+
+        Path path4 = g.GraphSearch(new Node("x"), new Node("d"));
+        Assert.assertNull(path4);
+
+        Path path5 = g.GraphSearch(new Node("a"), new Node("g"));
+        Assert.assertNull(path5);
+
+        Path path6 = g.GraphSearch(new Node("x"), new Node("z"));
+        Assert.assertNull(path6);
     }
 }

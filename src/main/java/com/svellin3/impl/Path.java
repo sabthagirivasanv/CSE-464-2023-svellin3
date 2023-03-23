@@ -5,14 +5,18 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Path {
-    private final List<Node> nodesInThePath;
+    private final LinkedList<Node> nodesInThePath;
 
     public Path() {
         nodesInThePath = new LinkedList<>();
     }
 
-    public void addNodeToThePath(Node node){
+    public void addNodeInTheEnd(Node node){
         nodesInThePath.add(node);
+    }
+
+    public void addNodeInTheFront(Node node){
+        nodesInThePath.addFirst(node);
     }
 
     @Override
