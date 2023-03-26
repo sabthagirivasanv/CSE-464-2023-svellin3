@@ -21,6 +21,5 @@ public interface GraphManager {
     int edgeSize();
     boolean containsEdge(String src, String dst);
     void outputGraph(String filePath) throws IOException;
-
-    Path GraphSearch(Node src, Node dst);
+    Path GraphSearch(Node src, Node dst, Algorithm algo);
 }

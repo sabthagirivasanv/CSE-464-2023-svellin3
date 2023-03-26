@@ -1,5 +1,6 @@
 package com.svellin3.impl;
 
+import com.svellin3.Algorithm;
 import com.svellin3.GraphManager;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
@@ -120,8 +121,17 @@ public class GraphManagerImpl implements GraphManager{
     }
 
     @Override
-    public Path GraphSearch(Node src, Node dst) {
-        return graph.findPathUsingDFS(src, dst);
+    public Path GraphSearch(Node src, Node dst, Algorithm algo) {
+        Path path;
+        switch (algo){
+            case BFS:
+                path = graph.findPathUsingBFS(src, dst);
+                break;
+            case DFS:
+            default:
+                path = graph.findPathUsingDFS(src, dst);
+        }
+        return path;
     }
 
 }
