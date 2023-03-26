@@ -134,17 +134,15 @@ public class Graph {
         }
 
         Map<String, String> parentMap = new HashMap<>();
+        parentMap.put(src.getName(), null);
         Map<String, List<Node>> edgeMap = getEdgeMap();
         Queue<String> queue = new LinkedList<>();
         Set<String> visited = new HashSet<>();
-        String currentParent = null;
         queue.add(src.getName());
         while (!queue.isEmpty()){
             String currentNode = queue.poll();
             if (!visited.contains(currentNode)){
                 visited.add(currentNode);
-                parentMap.put(currentNode, currentParent);
-                currentParent = currentNode;
 
                 if (currentNode.equals(dst.getName())){
                     break;
@@ -153,6 +151,9 @@ public class Graph {
                 List<Node> possibleDestinations = edgeMap.getOrDefault(currentNode, new LinkedList<>());
                 for (Node eachDst : possibleDestinations) {
                     queue.add(eachDst.getName());
+                    if (!parentMap.containsKey(eachDst.getName())){
+                        parentMap.put(eachDst.getName(), currentNode);
+                    }
                 }
             }
         }

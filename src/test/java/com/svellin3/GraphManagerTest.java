@@ -140,23 +140,40 @@ public class GraphManagerTest {
 
     @Test
     public void testGraphSearch() {
-        Path path1 = g.GraphSearch(new Node("a"), new Node("d"));
-        Assert.assertEquals("a -> b -> c -> d", path1.toString());
+        Path path = g.GraphSearch(new Node("a"), new Node("d"));
+        Assert.assertEquals("a -> b -> c -> d", path.toString());
 
-        Path path3 = g.GraphSearch(new Node("a"), new Node("a"));
-        Assert.assertEquals("a", path3.toString());
+        path = g.GraphSearch(new Node("a"), new Node("a"));
+        Assert.assertEquals("a", path.toString());
+
+
+        path = g.GraphSearch(new Node("b"), new Node("a"));
+        Assert.assertEquals("b -> c -> d -> a", path.toString());
+
+        g.addNodes("e","f","g");
+        g.addEdge("d","e");
+        g.addEdge("e","f");
+        g.addEdge("d","f");
+        g.addEdge("f","g");
+
+        path = g.GraphSearch(new Node("a"), new Node("g"));
+        Assert.assertEquals("a -> b -> c -> d -> f -> g", path.toString());
+    }
+
+    @Test
+    public void testGraphSearchNullCases(){
 
         g.addNode("f");
-        Path path2 = g.GraphSearch(new Node("a"), new Node("f"));
-        Assert.assertNull(path2);
+        Path path = g.GraphSearch(new Node("a"), new Node("f"));
+        Assert.assertNull(path);
 
-        Path path4 = g.GraphSearch(new Node("x"), new Node("d"));
-        Assert.assertNull(path4);
+        path = g.GraphSearch(new Node("x"), new Node("d"));
+        Assert.assertNull(path);
 
-        Path path5 = g.GraphSearch(new Node("a"), new Node("g"));
-        Assert.assertNull(path5);
+        path = g.GraphSearch(new Node("a"), new Node("g"));
+        Assert.assertNull(path);
 
-        Path path6 = g.GraphSearch(new Node("x"), new Node("z"));
-        Assert.assertNull(path6);
+        path = g.GraphSearch(new Node("x"), new Node("z"));
+        Assert.assertNull(path);
     }
 }
