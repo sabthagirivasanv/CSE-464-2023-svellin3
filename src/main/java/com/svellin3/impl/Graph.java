@@ -134,7 +134,6 @@ public class Graph {
 
         Map<String, List<Node>> edgeMap = getEdgeMap();
         Set<String> visited = new HashSet<>();
-        String currentParent = null;
         Path path = new Path();
 
         boolean found = findDestinationUsingDFS(src.getName(), dst.getName(), edgeMap, path, visited);
@@ -152,6 +151,8 @@ public class Graph {
                 return true;
             }else{
                 List<Node> possibleDestinations = edgeMap.getOrDefault(currentNode, new LinkedList<>());
+                possibleDestinations = possibleDestinations.stream()
+                        .sorted(Comparator.comparing(Node::getName)).collect(Collectors.toList());
                 for (Node eachDst : possibleDestinations) {
                     if (findDestinationUsingDFS(eachDst.getName(), dst, edgeMap, path, visited)){
                         return true;
