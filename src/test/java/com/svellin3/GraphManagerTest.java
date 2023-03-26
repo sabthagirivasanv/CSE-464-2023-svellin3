@@ -138,25 +138,45 @@ public class GraphManagerTest {
         Assert.assertEquals(expected, output);
     }
 
+
     @Test
     public void testGraphSearch() {
-        Path path1 = g.GraphSearch(new Node("a"), new Node("d"));
-        Assert.assertEquals("a -> b -> c -> d", path1.toString());
+        Path path = g.GraphSearch(new Node("a"), new Node("d"));
+        Assert.assertEquals("a -> b -> c -> d", path.toString());
 
-        Path path3 = g.GraphSearch(new Node("a"), new Node("a"));
-        Assert.assertEquals("a", path3.toString());
+        path = g.GraphSearch(new Node("a"), new Node("a"));
+        Assert.assertEquals("a", path.toString());
+
+
+        path = g.GraphSearch(new Node("b"), new Node("a"));
+        Assert.assertEquals("b -> c -> d -> a", path.toString());
+
+        g.addNodes("e","f","g", "h", "i");
+        g.addEdge("d","e");
+        g.addEdge("d","f");
+        g.addEdge("d","g");
+        g.addEdge("d","h");
+        g.addEdge("g","h");
+        g.addEdge("h","i");
+
+        path = g.GraphSearch(new Node("a"), new Node("i"));
+        Assert.assertEquals("a -> b -> c -> d -> g -> h -> i", path.toString());
+    }
+
+    @Test
+    public void testGraphSearchNullCases(){
 
         g.addNode("f");
-        Path path2 = g.GraphSearch(new Node("a"), new Node("f"));
-        Assert.assertNull(path2);
+        Path path = g.GraphSearch(new Node("a"), new Node("f"));
+        Assert.assertNull(path);
 
-        Path path4 = g.GraphSearch(new Node("x"), new Node("d"));
-        Assert.assertNull(path4);
+        path = g.GraphSearch(new Node("x"), new Node("d"));
+        Assert.assertNull(path);
 
-        Path path5 = g.GraphSearch(new Node("a"), new Node("g"));
-        Assert.assertNull(path5);
+        path = g.GraphSearch(new Node("a"), new Node("g"));
+        Assert.assertNull(path);
 
-        Path path6 = g.GraphSearch(new Node("x"), new Node("z"));
-        Assert.assertNull(path6);
+        path = g.GraphSearch(new Node("x"), new Node("z"));
+        Assert.assertNull(path);
     }
 }
