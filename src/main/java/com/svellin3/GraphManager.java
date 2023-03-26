@@ -1,5 +1,8 @@
 package com.svellin3;
 
+import com.svellin3.impl.Node;
+import com.svellin3.impl.Path;
+
 import java.io.IOException;
 
 public interface GraphManager {
@@ -18,4 +21,5 @@ public interface GraphManager {
     int edgeSize();
     boolean containsEdge(String src, String dst);
     void outputGraph(String filePath) throws IOException;
+    Path GraphSearch(Node src, Node dst);
 }

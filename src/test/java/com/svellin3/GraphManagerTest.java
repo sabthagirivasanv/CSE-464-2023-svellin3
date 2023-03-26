@@ -2,6 +2,8 @@ package com.svellin3;
 
 
 import com.svellin3.impl.GraphManagerImpl;
+import com.svellin3.impl.Node;
+import com.svellin3.impl.Path;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -134,5 +136,44 @@ public class GraphManagerTest {
         List<String> output = Files.readAllLines(Paths.get(TEST_OUTPUT_DOT_GRAPH_FILE));
         List<String> expected = Files.readAllLines(Paths.get(EXPECTED_OUTPUT_DOT_GRAPH_FILE));
         Assert.assertEquals(expected, output);
+    }
+
+    @Test
+    public void testGraphSearch() {
+        Path path = g.GraphSearch(new Node("a"), new Node("d"));
+        Assert.assertEquals("a -> b -> c -> d", path.toString());
+
+        path = g.GraphSearch(new Node("a"), new Node("a"));
+        Assert.assertEquals("a", path.toString());
+
+
+        path = g.GraphSearch(new Node("b"), new Node("a"));
+        Assert.assertEquals("b -> c -> d -> a", path.toString());
+
+        g.addNodes("e","f","g");
+        g.addEdge("d","e");
+        g.addEdge("e","f");
+        g.addEdge("d","f");
+        g.addEdge("f","g");
+
+        path = g.GraphSearch(new Node("a"), new Node("g"));
+        Assert.assertEquals("a -> b -> c -> d -> f -> g", path.toString());
+    }
+
+    @Test
+    public void testGraphSearchNullCases(){
+
+        g.addNode("f");
+        Path path = g.GraphSearch(new Node("a"), new Node("f"));
+        Assert.assertNull(path);
+
+        path = g.GraphSearch(new Node("x"), new Node("d"));
+        Assert.assertNull(path);
+
+        path = g.GraphSearch(new Node("a"), new Node("g"));
+        Assert.assertNull(path);
+
+        path = g.GraphSearch(new Node("x"), new Node("z"));
+        Assert.assertNull(path);
     }
 }
