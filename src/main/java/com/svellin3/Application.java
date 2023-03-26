@@ -1,6 +1,8 @@
 package com.svellin3;
 
 import com.svellin3.impl.GraphManagerImpl;
+import com.svellin3.impl.Node;
+import com.svellin3.impl.Path;
 
 import java.io.IOException;
 import java.util.Scanner;
@@ -26,7 +28,9 @@ public class Application {
             +"8. remove an edge\n"
             +"9. output as DOT graph\n"
             +"10. output into graphics\n"
-            +"11. exit\n"
+            +"11. search nodes by BFS\n"
+            +"12. search nodes by DFS\n"
+            +"13. exit\n"
             );
             option = new Scanner(System.in).nextInt();
 
@@ -86,15 +90,30 @@ public class Application {
                     graphManager.outputGraphics(graphicsFileName, format);
                     break;
                 case 11:
+                    graphSearch(graphManager, Algorithm.BFS);
+                    break;
+                case 12:
+                    graphSearch(graphManager, Algorithm.DFS);
+                    break;
+                case 13:
                     System.out.println("Exiting the applications...");
                     return;
             }
 
             System.out.println("\n\nSelect an option to proceed"+
                     "\n0. Show actions"
-                    +"\n11. Exit"
+                    +"\n13. Exit"
             );
             option = new Scanner(System.in).nextInt();
         }
+    }
+
+    private static void graphSearch(GraphManager graphManager, Algorithm algo) {
+        System.out.println("Please enter the source node:");
+        String src = new Scanner(System.in).nextLine();
+        System.out.println("Please enter the destination node:");
+        String dst = new Scanner(System.in).nextLine();
+        Path path = graphManager.GraphSearch(new Node(src), new Node(dst), algo);
+        System.out.println("The path is :\n"+path.toString());
     }
 }
