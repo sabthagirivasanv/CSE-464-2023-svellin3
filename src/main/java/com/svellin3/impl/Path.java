@@ -2,7 +2,6 @@ package com.svellin3.impl;
 
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 
 public class Path {
     private final LinkedList<Node> nodesInThePath;
@@ -17,6 +16,10 @@ public class Path {
 
     public void addNodeInTheFront(Node node){
         nodesInThePath.addFirst(node);
+    }
+
+    public Node removeLastNode(){
+        return nodesInThePath.removeLast();
     }
 
     @Override
