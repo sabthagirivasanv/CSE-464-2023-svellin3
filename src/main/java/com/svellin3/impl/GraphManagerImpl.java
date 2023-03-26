@@ -8,7 +8,6 @@ import guru.nidi.graphviz.parse.Parser;
 
 import java.io.*;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -118,6 +117,11 @@ public class GraphManagerImpl implements GraphManager{
         return Optional.ofNullable(filename)
                 .filter(f -> f.contains("."))
                 .map(f -> f.substring(filename.lastIndexOf(".") + 1));
+    }
+
+    @Override
+    public Path GraphSearch(Node src, Node dst) {
+        return graph.findPathUsingDFS(src, dst);
     }
 
 }
