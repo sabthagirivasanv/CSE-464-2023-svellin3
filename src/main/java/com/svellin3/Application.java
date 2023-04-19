@@ -17,21 +17,7 @@ public class Application {
 
         int option = 0;
         while(option != 11){
-            System.out.println("\n\npress the below options to perform actions:\n"
-            +"1. print the graph\n"
-            +"2. output to file\n"
-            +"3. add a new node\n"
-            +"4. add a list of new nodes\n"
-            +"5. remove a node\n"
-            +"6. remove a list of nodes\n"
-            +"7. add an edge\n"
-            +"8. remove an edge\n"
-            +"9. output as DOT graph\n"
-            +"10. output into graphics\n"
-            +"11. search nodes by BFS\n"
-            +"12. search nodes by DFS\n"
-            +"13. exit\n"
-            );
+            printAllOptions();
             option = new Scanner(System.in).nextInt();
 
             switch (option){
@@ -106,6 +92,24 @@ public class Application {
             );
             option = new Scanner(System.in).nextInt();
         }
+    }
+
+    private static void printAllOptions() {
+        System.out.println("\n\npress the below options to perform actions:\n"
+        +"1. print the graph\n"
+        +"2. output to file\n"
+        +"3. add a new node\n"
+        +"4. add a list of new nodes\n"
+        +"5. remove a node\n"
+        +"6. remove a list of nodes\n"
+        +"7. add an edge\n"
+        +"8. remove an edge\n"
+        +"9. output as DOT graph\n"
+        +"10. output into graphics\n"
+        +"11. search nodes by BFS\n"
+        +"12. search nodes by DFS\n"
+        +"13. exit\n"
+        );
     }
 
     private static void graphSearch(GraphManager graphManager, Algorithm algo) {
