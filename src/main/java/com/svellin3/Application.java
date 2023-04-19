@@ -25,55 +25,31 @@ public class Application {
                     graphManager.toString();
                     break;
                 case 2:
-                    System.out.println("Please enter the output filename:");
-                    String outputFileName = new Scanner(System.in).nextLine();
-                    graphManager.outputGraph(outputFileName);
+                    processOutputGraphToAFile(graphManager);
                     break;
                 case 3:
-                    System.out.println("Please enter the node name:");
-                    String nodeName = new Scanner(System.in).nextLine();
-                    graphManager.addNode(nodeName);
+                    processAddNode(graphManager);
                     break;
                 case 4:
-                    System.out.println("Please enter the list of node names as comma separated values:");
-                    String nodeNameList = new Scanner(System.in).nextLine();
-                    graphManager.addNodes(nodeNameList.split(","));
+                    processAddListOfNodes(graphManager);
                     break;
                 case 5:
-                    System.out.println("Please enter the node name to be removed:");
-                    String nodeNameToBeRemoved = new Scanner(System.in).nextLine();
-                    graphManager.removeNode(nodeNameToBeRemoved);
+                    processRemoveNode(graphManager);
                     break;
                 case 6:
-                    System.out.println("Please enter the list of node names to be removed as comma separated values:");
-                    String toBeRemovedList = new Scanner(System.in).nextLine();
-                    graphManager.removeNodes(toBeRemovedList.split(","));
+                    processRemoveNodes(graphManager);
                     break;
                 case 7:
-                    System.out.println("Please enter the source node:");
-                    String sourceNode = new Scanner(System.in).nextLine();
-                    System.out.println("Please enter the destination node:");
-                    String destNode = new Scanner(System.in).nextLine();
-                    graphManager.addEdge(sourceNode, destNode);
+                    processAddEdge(graphManager);
                     break;
                 case 8:
-                    System.out.println("Please enter the source node:");
-                    String sourceNodeToBeRemoved = new Scanner(System.in).nextLine();
-                    System.out.println("Please enter the destination node:");
-                    String destNodeToBeRemoved = new Scanner(System.in).nextLine();
-                    graphManager.removeEdge(sourceNodeToBeRemoved, destNodeToBeRemoved);
+                    processRemoveEdge(graphManager);
                     break;
                 case 9:
-                    System.out.println("Please enter the dot filename:");
-                    String outputDotFileName = new Scanner(System.in).nextLine();
-                    graphManager.outputDOTGraph(outputDotFileName);
+                    processOutputAsDOTFile(graphManager);
                     break;
                 case 10:
-                    System.out.println("Please enter the graphics filename:");
-                    String graphicsFileName = new Scanner(System.in).nextLine();
-                    System.out.println("Please enter the format:");
-                    String format = new Scanner(System.in).nextLine();
-                    graphManager.outputGraphics(graphicsFileName, format);
+                    processOutputIntoGraphics(graphManager);
                     break;
                 case 11:
                     graphSearch(graphManager, Algorithm.BFS);
@@ -110,6 +86,66 @@ public class Application {
         +"12. search nodes by DFS\n"
         +"13. exit\n"
         );
+    }
+
+    private static void processOutputGraphToAFile(GraphManager graphManager) throws IOException {
+        System.out.println("Please enter the output filename:");
+        String outputFileName = new Scanner(System.in).nextLine();
+        graphManager.outputGraph(outputFileName);
+    }
+
+    private static void processAddNode(GraphManager graphManager) {
+        System.out.println("Please enter the node name:");
+        String nodeName = new Scanner(System.in).nextLine();
+        graphManager.addNode(nodeName);
+    }
+
+    private static void processAddListOfNodes(GraphManager graphManager) {
+        System.out.println("Please enter the list of node names as comma separated values:");
+        String nodeNameList = new Scanner(System.in).nextLine();
+        graphManager.addNodes(nodeNameList.split(","));
+    }
+
+    private static void processRemoveNode(GraphManager graphManager) {
+        System.out.println("Please enter the node name to be removed:");
+        String nodeNameToBeRemoved = new Scanner(System.in).nextLine();
+        graphManager.removeNode(nodeNameToBeRemoved);
+    }
+
+    private static void processRemoveNodes(GraphManager graphManager) {
+        System.out.println("Please enter the list of node names to be removed as comma separated values:");
+        String toBeRemovedList = new Scanner(System.in).nextLine();
+        graphManager.removeNodes(toBeRemovedList.split(","));
+    }
+
+    private static void processAddEdge(GraphManager graphManager) {
+        System.out.println("Please enter the source node:");
+        String sourceNode = new Scanner(System.in).nextLine();
+        System.out.println("Please enter the destination node:");
+        String destNode = new Scanner(System.in).nextLine();
+        graphManager.addEdge(sourceNode, destNode);
+    }
+
+    private static void processRemoveEdge(GraphManager graphManager) {
+        System.out.println("Please enter the source node:");
+        String sourceNodeToBeRemoved = new Scanner(System.in).nextLine();
+        System.out.println("Please enter the destination node:");
+        String destNodeToBeRemoved = new Scanner(System.in).nextLine();
+        graphManager.removeEdge(sourceNodeToBeRemoved, destNodeToBeRemoved);
+    }
+
+    private static void processOutputAsDOTFile(GraphManager graphManager) throws IOException {
+        System.out.println("Please enter the dot filename:");
+        String outputDotFileName = new Scanner(System.in).nextLine();
+        graphManager.outputDOTGraph(outputDotFileName);
+    }
+
+    private static void processOutputIntoGraphics(GraphManager graphManager) throws IOException {
+        System.out.println("Please enter the graphics filename:");
+        String graphicsFileName = new Scanner(System.in).nextLine();
+        System.out.println("Please enter the format:");
+        String format = new Scanner(System.in).nextLine();
+        graphManager.outputGraphics(graphicsFileName, format);
     }
 
     private static void graphSearch(GraphManager graphManager, Algorithm algo) {
