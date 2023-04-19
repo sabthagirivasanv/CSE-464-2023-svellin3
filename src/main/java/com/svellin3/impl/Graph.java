@@ -11,9 +11,9 @@ import static guru.nidi.graphviz.model.Factory.mutGraph;
 import static guru.nidi.graphviz.model.Factory.mutNode;
 
 public class Graph {
-    private String name;
-    private Map<String, Node> nodes;
-    private Map<String, Edge> edges;
+    private final String name;
+    private final Map<String, Node> nodes;
+    private final Map<String, Edge> edges;
 
     public Graph(MutableGraph mutableGraph) {
         nodes = new HashMap<>();
@@ -117,10 +117,10 @@ public class Graph {
     }
 
     public MutableGraph convertToGraphViz(){
-        MutableGraph g = mutGraph(name).setDirected(true);
-        nodes.values().forEach(each -> g.add(mutNode(each.getName())));
-        edges.values().forEach(each -> g.add(mutNode(each.getSource().getName()).addLink(mutNode(each.getDestination().getName()))));
-        return g;
+        MutableGraph mutableGraph = mutGraph(name).setDirected(true);
+        nodes.values().forEach(each -> mutableGraph.add(mutNode(each.getName())));
+        edges.values().forEach(each -> mutableGraph.add(mutNode(each.getSource().getName()).addLink(mutNode(each.getDestination().getName()))));
+        return mutableGraph;
     }
 
     public boolean containsEdge(String src, String dst) {
