@@ -41,12 +41,16 @@ public class GraphManagerImpl implements GraphManager{
 
     public String toString(){
         String output;
-        System.out.println("Number of Nodes: "+nodeSize());
-        System.out.println("Label of Nodes:"+ graph.getAllNodes());
-        System.out.println("Number of Edges: "+edgeSize());
+        printGraphStatistics();
         output = graph.convertToGraphViz().toString();
         System.out.println(output);
         return output;
+    }
+
+    private void printGraphStatistics() {
+        System.out.println("Number of Nodes: "+nodeSize());
+        System.out.println("Label of Nodes:"+ graph.getAllNodes());
+        System.out.println("Number of Edges: "+edgeSize());
     }
 
     public void addNode(String label){
