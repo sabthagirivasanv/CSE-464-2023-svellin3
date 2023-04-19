@@ -16,7 +16,7 @@ public class Application {
         graphManager.parseGraph(dotFileName);
 
         int option = 0;
-        while(option != 11){
+        while(option != 13){
             printAllOptions();
             option = new Scanner(System.in).nextInt();
 
@@ -58,7 +58,7 @@ public class Application {
                     graphSearch(graphManager, Algorithm.DFS);
                     break;
                 case 13:
-                    System.out.println("Exiting the applications...");
+                    System.out.println("Exiting the application...");
                     return;
             }
 
@@ -68,6 +68,7 @@ public class Application {
             );
             option = new Scanner(System.in).nextInt();
         }
+        System.out.println("Exiting the application...");
     }
 
     private static void printAllOptions() {

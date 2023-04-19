@@ -2,6 +2,9 @@ package com.svellin3.impl;
 
 import com.svellin3.Algorithm;
 import com.svellin3.GraphManager;
+import com.svellin3.graphSearcher.templatePattern.GraphSearcher;
+import com.svellin3.graphSearcher.templatePattern.impl.BFSGraphSearcher;
+import com.svellin3.graphSearcher.templatePattern.impl.DFSGraphSearcher;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
@@ -128,15 +131,16 @@ public class GraphManagerImpl implements GraphManager{
     @Override
     public Path GraphSearch(Node src, Node dst, Algorithm algo) {
         Path path;
+        GraphSearcher graphSearcher;
         switch (algo){
             case BFS:
-                path = graph.findPathUsingBFS(src, dst);
+                graphSearcher = new BFSGraphSearcher(graph, src, dst);
                 break;
             case DFS:
             default:
-                path = graph.findPathUsingDFS(src, dst);
+                graphSearcher = new DFSGraphSearcher(graph, src, dst);
         }
-        return path;
+        return graphSearcher.search();
     }
 
 }
