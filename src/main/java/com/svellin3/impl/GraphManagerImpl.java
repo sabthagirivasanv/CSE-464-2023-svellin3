@@ -14,6 +14,7 @@ import java.util.Optional;
 
 public class GraphManagerImpl implements GraphManager{
 
+    public static final int DEFAULT_WIDTH_SIZE = 900;
     Graph graph;
     public void parseGraph(String fileName) throws IOException {
         File initialFile = new File(fileName);
@@ -83,7 +84,7 @@ public class GraphManagerImpl implements GraphManager{
     @Override
     public void outputDOTGraph(String path) throws IOException {
         MutableGraph mutGraph = graph.convertToGraphViz();
-        Graphviz.fromGraph(mutGraph).width(900).render(Format.DOT).toFile(new File(path));
+        Graphviz.fromGraph(mutGraph).width(DEFAULT_WIDTH_SIZE).render(Format.DOT).toFile(new File(path));
     }
 
     @Override
@@ -91,13 +92,13 @@ public class GraphManagerImpl implements GraphManager{
         MutableGraph mutGraph = graph.convertToGraphViz();
 
         if(Objects.equals(format, "png") || Objects.equals(format, "PNG")){
-            Graphviz.fromGraph(mutGraph).width(900).render(Format.PNG).toFile(new File(path));
+            Graphviz.fromGraph(mutGraph).width(DEFAULT_WIDTH_SIZE).render(Format.PNG).toFile(new File(path));
         }
         if(Objects.equals(format, "svg") || Objects.equals(format, "SVG")){
-            Graphviz.fromGraph(mutGraph).width(900).render(Format.SVG).toFile(new File(path));
+            Graphviz.fromGraph(mutGraph).width(DEFAULT_WIDTH_SIZE).render(Format.SVG).toFile(new File(path));
         }
         if(Objects.equals(format, "dot") || Objects.equals(format, "DOT")){
-            Graphviz.fromGraph(mutGraph).width(900).render(Format.DOT).toFile(new File(path));
+            Graphviz.fromGraph(mutGraph).width(DEFAULT_WIDTH_SIZE).render(Format.DOT).toFile(new File(path));
         }
     }
 
