@@ -1,4 +1,4 @@
-package com.svellin3.graphSearcher.templatePattern;
+package com.svellin3.graphSearcherAlgo;
 
 import com.svellin3.impl.Edge;
 import com.svellin3.impl.Graph;
@@ -7,7 +7,7 @@ import com.svellin3.impl.Path;
 
 import java.util.*;
 
-public abstract class GraphSearcher {
+public abstract class GraphSearcherAlgo {
 
     protected final Graph graph;
 
@@ -21,7 +21,7 @@ public abstract class GraphSearcher {
 
     protected Set<String> visited;
 
-    public GraphSearcher(Graph graph, Node src, Node dst) {
+    public GraphSearcherAlgo(Graph graph, Node src, Node dst) {
         this.graph = graph;
         this.src = src;
         this.dst = dst;

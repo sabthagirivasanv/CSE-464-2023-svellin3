@@ -1,17 +1,17 @@
-package com.svellin3.graphSearcher.templatePattern.impl;
+package com.svellin3.graphSearcherAlgo.impl;
 
-import com.svellin3.graphSearcher.templatePattern.GraphSearcher;
+import com.svellin3.graphSearcherAlgo.GraphSearcherAlgo;
 import com.svellin3.impl.Graph;
 import com.svellin3.impl.Node;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public class DFSGraphSearcher extends GraphSearcher {
+public class DFSGraphSearcherAlgo extends GraphSearcherAlgo {
 
     private Stack<String> stack;
 
-    public DFSGraphSearcher(Graph graph, Node src, Node dst) {
+    public DFSGraphSearcherAlgo(Graph graph, Node src, Node dst) {
         super(graph, src, dst);
     }
 

@@ -1,17 +1,16 @@
-package com.svellin3.graphSearcher.templatePattern.impl;
+package com.svellin3.graphSearcherAlgo.impl;
 
-import com.svellin3.graphSearcher.templatePattern.GraphSearcher;
+import com.svellin3.graphSearcherAlgo.GraphSearcherAlgo;
 import com.svellin3.impl.Graph;
 import com.svellin3.impl.Node;
-import com.svellin3.impl.Path;
 
 import java.util.*;
 
-public class BFSGraphSearcher extends GraphSearcher {
+public class BFSGraphSearcherAlgo extends GraphSearcherAlgo {
 
     private Queue<String> queue;
 
-    public BFSGraphSearcher(Graph graph, Node src, Node dst) {
+    public BFSGraphSearcherAlgo(Graph graph, Node src, Node dst) {
         super(graph, src, dst);
     }
 

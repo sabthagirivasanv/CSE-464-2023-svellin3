@@ -2,9 +2,12 @@ package com.svellin3.impl;
 
 import com.svellin3.Algorithm;
 import com.svellin3.GraphManager;
-import com.svellin3.graphSearcher.templatePattern.GraphSearcher;
-import com.svellin3.graphSearcher.templatePattern.impl.BFSGraphSearcher;
-import com.svellin3.graphSearcher.templatePattern.impl.DFSGraphSearcher;
+import com.svellin3.graphSearcher.GraphSearcher;
+import com.svellin3.graphSearcher.strategy.GraphSearcherStrategy;
+import com.svellin3.graphSearcher.strategy.factory.GraphSearcherStrategyFactory;
+import com.svellin3.graphSearcherAlgo.GraphSearcherAlgo;
+import com.svellin3.graphSearcherAlgo.impl.BFSGraphSearcherAlgo;
+import com.svellin3.graphSearcherAlgo.impl.DFSGraphSearcherAlgo;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
@@ -131,16 +134,8 @@ public class GraphManagerImpl implements GraphManager{
     @Override
     public Path GraphSearch(Node src, Node dst, Algorithm algo) {
         Path path;
-        GraphSearcher graphSearcher;
-        switch (algo){
-            case BFS:
-                graphSearcher = new BFSGraphSearcher(graph, src, dst);
-                break;
-            case DFS:
-            default:
-                graphSearcher = new DFSGraphSearcher(graph, src, dst);
-        }
-        return graphSearcher.search();
+        GraphSearcherStrategy strategy = GraphSearcherStrategyFactory.getStrategy(algo);
+        GraphSearcher graphSearcher = new GraphSearcher(strategy);
+        return graphSearcher.search(graph, src, dst);
     }
-
 }
