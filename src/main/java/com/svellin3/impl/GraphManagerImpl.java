@@ -133,9 +133,24 @@ public class GraphManagerImpl implements GraphManager{
 
     @Override
     public Path GraphSearch(Node src, Node dst, Algorithm algo) {
-        Path path;
+        printSearchInfo(src, dst, algo);
         GraphSearcherStrategy strategy = GraphSearcherStrategyFactory.getStrategy(algo);
         GraphSearcher graphSearcher = new GraphSearcher(strategy);
-        return graphSearcher.search(graph, src, dst);
+        Path path = graphSearcher.search(graph, src, dst);
+        printPath(path);
+        return path;
+    }
+
+    private static void printSearchInfo(Node src, Node dst, Algorithm algo) {
+        System.out.printf("Searching path from %s to %s using algo: %s%n",
+                src.getName(), dst.getName(), algo.name());
+    }
+
+    private static void printPath(Path path) {
+        if (path != null){
+            System.out.printf("The path : %s%n", path.toString());
+        }else{
+            System.out.println("No path found!!!");
+        }
     }
 }

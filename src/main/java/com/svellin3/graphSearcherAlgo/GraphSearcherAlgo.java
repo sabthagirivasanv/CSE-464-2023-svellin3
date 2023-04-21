@@ -44,6 +44,7 @@ public abstract class GraphSearcherAlgo {
     private boolean processCurrentNode(String currentNode){
         if (!visited.contains(currentNode)){
             visited.add(currentNode);
+            printVisitingPath(new Node(currentNode));
             if (currentNode.equals(dst.getName())){
                 return true;
             }else{
@@ -54,6 +55,10 @@ public abstract class GraphSearcherAlgo {
             }
         }
         return false;
+    }
+
+    private void printVisitingPath(Node node) {
+        System.out.println("Visiting Path : "+generatePath(node).toString());
     }
 
     protected abstract void setupNextNode(String currentNode, String nextNode);
@@ -90,18 +95,21 @@ public abstract class GraphSearcherAlgo {
 
 
     protected Path generatePath() {
+        return generatePath(dst);
+    }
+
+    private Path generatePath(Node end){
         Path path = null;
-        if (nodeToParentNodeMap.containsKey(dst.getName())){
+        if (nodeToParentNodeMap.containsKey(end.getName())){
             path = new Path();
-            path.addNodeInTheFront(dst);
-            String parent = nodeToParentNodeMap.get(dst.getName());
+            path.addNodeInTheFront(end);
+            String parent = nodeToParentNodeMap.get(end.getName());
             while (parent != null){
                 path.addNodeInTheFront(new Node(parent));
                 parent = nodeToParentNodeMap.get(parent);
             }
         }
         return path;
-
     }
 
 }

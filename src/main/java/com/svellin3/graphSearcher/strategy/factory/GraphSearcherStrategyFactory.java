@@ -12,8 +12,10 @@ public class GraphSearcherStrategyFactory {
     private static final Map<Algorithm, GraphSearcherStrategy> strategyBag = new HashMap<>();
 
     static {
-        strategyBag.put(Algorithm.DFS, new DFSGraphSearcherStrategy());
-        strategyBag.put(Algorithm.BFS, new BFSGraphSearcherStrategy());
+        DFSGraphSearcherStrategy dfsStrategy = new DFSGraphSearcherStrategy();
+        BFSGraphSearcherStrategy bfsStrategy = new BFSGraphSearcherStrategy();
+        strategyBag.put(dfsStrategy.getAlgorithmName(), dfsStrategy);
+        strategyBag.put(bfsStrategy.getAlgorithmName(), bfsStrategy);
     }
     public static GraphSearcherStrategy getStrategy(Algorithm algorithm){
         return strategyBag.get(algorithm);
