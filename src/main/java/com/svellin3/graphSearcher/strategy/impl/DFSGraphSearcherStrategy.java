@@ -11,7 +11,7 @@ import com.svellin3.impl.Path;
 public class DFSGraphSearcherStrategy extends GraphSearcherStrategy {
 
     public DFSGraphSearcherStrategy() {
-        algorithmName = Algorithm.DFS;
+        super(Algorithm.DFS);
     }
     @Override
     public Path search(Graph graph, Node source, Node destination) {

@@ -45,11 +45,7 @@ public class DFSGraphSearcherAlgo extends GraphSearcherAlgo {
 
     @Override
     protected void setupSearch() {
-        nodeToParentNodeMap = new HashMap<>();
-        nodeToParentNodeMap.put(src.getName(), null);
-
-        edgeMap = getEdgeMap();
-        visited = new HashSet<>();
+        super.setupSearch();
         stack = new Stack<>();
         stack.push(src.getName());
     }

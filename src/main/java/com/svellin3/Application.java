@@ -16,7 +16,7 @@ public class Application {
         graphManager.parseGraph(dotFileName);
 
         int option = 0;
-        while(option != 13){
+        while(option != 99){
             printAllOptions();
             option = new Scanner(System.in).nextInt();
 
@@ -58,13 +58,16 @@ public class Application {
                     graphSearch(graphManager, Algorithm.DFS);
                     break;
                 case 13:
+                    graphSearch(graphManager, Algorithm.RANDOM_WALK);
+                    break;
+                case 99:
                     System.out.println("Exiting the application...");
                     return;
             }
 
             System.out.println("\n\nSelect an option to proceed"+
                     "\n0. Show actions"
-                    +"\n13. Exit"
+                    +"\n99. Exit"
             );
             option = new Scanner(System.in).nextInt();
         }
@@ -85,7 +88,8 @@ public class Application {
         +"10. output into graphics\n"
         +"11. search nodes by BFS\n"
         +"12. search nodes by DFS\n"
-        +"13. exit\n"
+        +"13. search nodes by Random Walk\n"
+        +"99. exit\n"
         );
     }
 

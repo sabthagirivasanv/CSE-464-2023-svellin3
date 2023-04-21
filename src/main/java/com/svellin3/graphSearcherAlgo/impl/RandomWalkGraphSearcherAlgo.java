@@ -6,17 +6,17 @@ import com.svellin3.impl.Node;
 
 import java.util.*;
 
-public class BFSGraphSearcherAlgo extends GraphSearcherAlgo {
+public class RandomWalkGraphSearcherAlgo extends GraphSearcherAlgo {
 
-    private Queue<String> queue;
+    private List<String> nextNodes;
 
-    public BFSGraphSearcherAlgo(Graph graph, Node src, Node dst) {
+    public RandomWalkGraphSearcherAlgo(Graph graph, Node src, Node dst) {
         super(graph, src, dst);
     }
 
     @Override
     protected void setupNextNode(String currentNode, String nextNode) {
-        queue.add(nextNode);
+        nextNodes.add(nextNode);
         if (!nodeToParentNodeMap.containsKey(nextNode)){
             nodeToParentNodeMap.put(nextNode, currentNode);
         }
@@ -29,18 +29,22 @@ public class BFSGraphSearcherAlgo extends GraphSearcherAlgo {
 
     @Override
     protected String getNext() {
-        return queue.poll();
+        Random random = new Random();
+        int randomIndex = random.nextInt(nextNodes.size());
+        String next = nextNodes.get(randomIndex);
+        nextNodes.remove(next);
+        return next;
     }
 
     @Override
     protected boolean isNext() {
-        return !queue.isEmpty();
+        return !nextNodes.isEmpty();
     }
 
     @Override
     protected void setupSearch() {
         super.setupSearch();
-        queue = new LinkedList<>();
-        queue.add(src.getName());
+        nextNodes = new LinkedList<>();
+        nextNodes.add(src.getName());
     }
 }

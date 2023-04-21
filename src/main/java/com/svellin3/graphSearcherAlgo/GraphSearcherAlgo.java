@@ -69,7 +69,12 @@ public abstract class GraphSearcherAlgo {
 
     protected abstract boolean isNext();
 
-    protected abstract void setupSearch();
+    protected void setupSearch(){
+        nodeToParentNodeMap = new HashMap<>();
+        nodeToParentNodeMap.put(src.getName(), null);
+        edgeMap = getEdgeMap();
+        visited = new HashSet<>();
+    }
 
     private boolean validateInput(Node... nodes) {
         for (Node each : nodes) {

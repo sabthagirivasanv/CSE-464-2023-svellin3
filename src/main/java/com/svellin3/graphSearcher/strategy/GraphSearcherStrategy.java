@@ -9,6 +9,10 @@ public abstract class GraphSearcherStrategy {
 
     protected Algorithm algorithmName;
 
+    public GraphSearcherStrategy(Algorithm algorithmName) {
+        this.algorithmName = algorithmName;
+    }
+
     public abstract Path search(Graph graph, Node source, Node destination);
 
     public Algorithm getAlgorithmName() {
