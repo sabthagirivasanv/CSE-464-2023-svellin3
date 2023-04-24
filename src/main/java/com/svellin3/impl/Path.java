@@ -34,4 +34,8 @@ public class Path {
         }
         return builder.toString();
     }
+
+    public boolean isEmpty(){
+        return nodesInThePath.isEmpty();
+    }
 }

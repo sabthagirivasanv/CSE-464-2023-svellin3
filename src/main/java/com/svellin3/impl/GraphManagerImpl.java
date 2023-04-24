@@ -2,6 +2,12 @@ package com.svellin3.impl;
 
 import com.svellin3.Algorithm;
 import com.svellin3.GraphManager;
+import com.svellin3.graphSearcher.GraphSearcher;
+import com.svellin3.graphSearcher.strategy.GraphSearcherStrategy;
+import com.svellin3.graphSearcher.strategy.factory.GraphSearcherStrategyFactory;
+import com.svellin3.graphSearcherAlgo.GraphSearcherAlgo;
+import com.svellin3.graphSearcherAlgo.impl.BFSGraphSearcherAlgo;
+import com.svellin3.graphSearcherAlgo.impl.DFSGraphSearcherAlgo;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
@@ -14,6 +20,7 @@ import java.util.Optional;
 
 public class GraphManagerImpl implements GraphManager{
 
+    public static final int DEFAULT_WIDTH_SIZE = 900;
     Graph graph;
     public void parseGraph(String fileName) throws IOException {
         File initialFile = new File(fileName);
@@ -41,12 +48,16 @@ public class GraphManagerImpl implements GraphManager{
 
     public String toString(){
         String output;
-        System.out.println("Number of Nodes: "+nodeSize());
-        System.out.println("Label of Nodes:"+ graph.getAllNodes());
-        System.out.println("Number of Edges: "+edgeSize());
+        printGraphStatistics();
         output = graph.convertToGraphViz().toString();
         System.out.println(output);
         return output;
+    }
+
+    private void printGraphStatistics() {
+        System.out.println("Number of Nodes: "+nodeSize());
+        System.out.println("Label of Nodes:"+ graph.getAllNodes());
+        System.out.println("Number of Edges: "+edgeSize());
     }
 
     public void addNode(String label){
@@ -79,7 +90,7 @@ public class GraphManagerImpl implements GraphManager{
     @Override
     public void outputDOTGraph(String path) throws IOException {
         MutableGraph mutGraph = graph.convertToGraphViz();
-        Graphviz.fromGraph(mutGraph).width(900).render(Format.DOT).toFile(new File(path));
+        Graphviz.fromGraph(mutGraph).width(DEFAULT_WIDTH_SIZE).render(Format.DOT).toFile(new File(path));
     }
 
     @Override
@@ -87,13 +98,13 @@ public class GraphManagerImpl implements GraphManager{
         MutableGraph mutGraph = graph.convertToGraphViz();
 
         if(Objects.equals(format, "png") || Objects.equals(format, "PNG")){
-            Graphviz.fromGraph(mutGraph).width(900).render(Format.PNG).toFile(new File(path));
+            Graphviz.fromGraph(mutGraph).width(DEFAULT_WIDTH_SIZE).render(Format.PNG).toFile(new File(path));
         }
         if(Objects.equals(format, "svg") || Objects.equals(format, "SVG")){
-            Graphviz.fromGraph(mutGraph).width(900).render(Format.SVG).toFile(new File(path));
+            Graphviz.fromGraph(mutGraph).width(DEFAULT_WIDTH_SIZE).render(Format.SVG).toFile(new File(path));
         }
         if(Objects.equals(format, "dot") || Objects.equals(format, "DOT")){
-            Graphviz.fromGraph(mutGraph).width(900).render(Format.DOT).toFile(new File(path));
+            Graphviz.fromGraph(mutGraph).width(DEFAULT_WIDTH_SIZE).render(Format.DOT).toFile(new File(path));
         }
     }
 
@@ -122,16 +133,24 @@ public class GraphManagerImpl implements GraphManager{
 
     @Override
     public Path GraphSearch(Node src, Node dst, Algorithm algo) {
-        Path path;
-        switch (algo){
-            case BFS:
-                path = graph.findPathUsingBFS(src, dst);
-                break;
-            case DFS:
-            default:
-                path = graph.findPathUsingDFS(src, dst);
-        }
+        printSearchInfo(src, dst, algo);
+        GraphSearcherStrategy strategy = GraphSearcherStrategyFactory.getStrategy(algo);
+        GraphSearcher graphSearcher = new GraphSearcher(strategy);
+        Path path = graphSearcher.search(graph, src, dst);
+        printPath(path);
         return path;
     }
 
+    private static void printSearchInfo(Node src, Node dst, Algorithm algo) {
+        System.out.printf("Searching path from %s to %s using algo: %s%n",
+                src.getName(), dst.getName(), algo.name());
+    }
+
+    private static void printPath(Path path) {
+        if (path != null){
+            System.out.printf("The path : %s%n", path.toString());
+        }else{
+            System.out.println("No path found!!!");
+        }
+    }
 }
